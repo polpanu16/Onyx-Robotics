@@ -519,8 +519,11 @@ class HomePage extends StatelessWidget {
                                 primary: true,
                               ),
                               ActionButton(
-                                'เบื้องหลังการสร้าง',
-                                () => go(context, '/learn'),
+                                'ดาวน์โหลด PDF ทุกหัวข้อ',
+                                () => openLink(
+                                  'downloads/pdfs/onyx-complete.pdf',
+                                ),
+                                icon: Icons.download,
                               ),
                             ],
                           ),
@@ -1789,20 +1792,6 @@ class ResultView extends StatelessWidget {
               primary: true,
             ),
             const SizedBox(height: 12),
-            if (refined) ...[
-              ActionButton(
-                'เปิดลิงก์เว็บไซต์บน GitHub Pages',
-                () => viewLink(siteUrl),
-                icon: Icons.open_in_new,
-              ),
-              const SizedBox(height: 12),
-              ActionButton(
-                'เปิด repository ของโครงงาน',
-                () => viewLink(repositoryUrl),
-                icon: Icons.open_in_new,
-              ),
-              const SizedBox(height: 12),
-            ],
             ActionButton(
               'ดาวน์โหลดขั้นตอน GitHub Pages',
               () => openLink(lesson.source),
