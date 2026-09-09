@@ -1,0 +1,8 @@
+flowchart TD
+    S[Read sensors] --> B{Battery below 20%?}
+    B -->|Yes| C[Stop mission and request charging]
+    B -->|No| O{Obstacle detected?}
+    O -->|Yes| R[Stop and replan]
+    R --> S
+    O -->|No| M[Move]
+    M --> S

@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ONYX / System architecture</title><link rel="stylesheet" href="archive.css"></head>
+<body><header><a href="./#/learn/systems/4">← ONYX / LEARNING ARCHIVE</a><span class="eyebrow">SYSTEM ARCHITECTURE</span></header><main>
+<p class="eyebrow">MODULE 03 / MERMAID</p><h1>SENSE. DECIDE. MOVE.</h1><p class="muted" id="version"></p>
+<div class="actions"><a class="button" href="?version=zero">รอบแรก</a><a class="button" href="?version=refined">รอบปรับปรุง</a><a class="button" id="download" download>ดาวน์โหลด .mmd</a><button id="save" disabled>ดาวน์โหลด SVG</button></div>
+<p class="status" id="status">กำลังโหลด Mermaid…</p><div id="diagram" class="mermaid"></div>
+<details><summary>ดู source ที่ใช้ render</summary><pre id="source"></pre></details>
+<p class="notice">ผังแนวคิดเพื่อการศึกษา ไม่ใช่ระบบควบคุมที่ผ่านการรับรอง ตัว renderer ต้องเชื่อมต่ออินเทอร์เน็ต หากโหลดไม่ได้สามารถดาวน์โหลด source ไปเปิดใน Mermaid Editor ได้</p>
+<footer>ONYX–01 / FICTIONAL EDUCATIONAL PROTOTYPE</footer></main>
+<script type="module">
+const refined=new URLSearchParams(location.search).get('version')!=='zero';
+const file=`downloads/onyx-system${refined?'':'-zero'}.mmd`;
+document.querySelector('#download').href=file;
+document.querySelector('#version').textContent=refined?'REFINED OUTPUT / เงื่อนไขแบตเตอรี่ สิ่งกีดขวาง และ feedback':'FIRST OUTPUT / ลำดับสามขั้นตอน';
+try{
+ const response=await fetch(file);if(!response.ok)throw new Error('Cannot load source');const source=await response.text();document.querySelector('#source').textContent=source;
+ const {default:mermaid}=await import('https://cdn.jsdelivr.net/npm/mermaid@11.12.0/dist/mermaid.esm.min.mjs');
+ mermaid.initialize({startOnLoad:false,theme:'dark',securityLevel:'strict',themeVariables:{primaryColor:'#172730',primaryTextColor:'#ecedea',primaryBorderColor:'#698b9c',lineColor:'#b5dcf0',fontFamily:'Arial',background:'#08090b'}});
+ const {svg}=await mermaid.render('onyx-system-diagram',source);document.querySelector('#diagram').innerHTML=svg;
+ document.querySelector('#status').textContent='Rendered from project Mermaid source';
+ const save=document.querySelector('#save');save.disabled=false;save.onclick=()=>{const u=URL.createObjectURL(new Blob([svg],{type:'image/svg+xml'}));const a=document.createElement('a');a.href=u;a.download=`onyx-system-${refined?'refined':'zero'}.svg`;a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
+}catch(e){document.querySelector('#status').textContent='โหลดแผนผังไม่สำเร็จ กรุณาตรวจอินเทอร์เน็ต หรือดาวน์โหลด .mmd แล้วเปิดใน Mermaid Editor';}
+</script></body></html>

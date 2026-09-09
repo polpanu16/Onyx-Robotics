@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+
+    This is a placeholder for base href that will be replaced by the value of
+    the `--base-href` argument provided to `flutter build`.
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="ONYX-01 หุ่นยนต์ต้นแบบสีดำแห่งอนาคต สำรวจผลงานการใช้ AI ผ่านภาพ กราฟ ผังงาน เอกสาร และเว็บไซต์ รวม 6 หัวข้อ พร้อม PDF">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ONYX Robotics">
+  <meta property="og:locale" content="th_TH">
+  <meta property="og:title" content="ONYX-01 | หุ่นยนต์ต้นแบบแห่งอนาคต">
+  <meta property="og:description" content="หุ่นยนต์หนึ่งตัว เรียนรู้หกด้าน — สำรวจผลงาน ONYX-01 พร้อมภาพ กราฟ ผังงาน และเอกสารประกอบ">
+  <meta property="og:url" content="https://polpanu16.github.io/Onyx-Robotics/">
+  <meta property="og:image" content="https://polpanu16.github.io/Onyx-Robotics/share-cover.png">
+  <meta property="og:image:alt" content="ONYX-01 หุ่นยนต์เกราะดำและดวงตาสีฟ้าอ่อน">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="ONYX-01 | หุ่นยนต์ต้นแบบแห่งอนาคต">
+  <meta name="twitter:description" content="หุ่นยนต์หนึ่งตัว เรียนรู้หกด้าน พร้อมภาพ กราฟ และเอกสารประกอบ">
+  <meta name="twitter:image" content="https://polpanu16.github.io/Onyx-Robotics/share-cover.png">
+  <link rel="canonical" href="https://polpanu16.github.io/Onyx-Robotics/">
+  <meta name="theme-color" content="#08090b">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="ONYX–01">
+  <link rel="apple-touch-icon" href="favicon.svg">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+
+  <title>ONYX-01 | หุ่นยนต์ต้นแบบแห่งอนาคต</title>
+  <link rel="manifest" href="manifest.json">
+</head>
+<body>
+  <style>
+    body{margin:0;background:#08090b}
+    #loading{position:fixed;inset:0;display:grid;place-content:center;text-align:center;color:#ecedea;font-family:Arial,sans-serif;background:radial-gradient(ellipse at center,#101f2c 0,transparent 58%)}
+    #loading strong{font-size:34px;letter-spacing:12px;text-shadow:0 0 30px #81d8ff40}
+    #loading p{font-size:9px;letter-spacing:3px;color:#959ba6;margin-top:22px}
+    .boot-mark{width:34px;height:34px;border:1px solid #81d8ff;margin:0 auto 38px;transform:rotate(45deg);box-shadow:0 0 24px #81d8ff44,inset 0 0 18px #81d8ff22;animation:boot-pulse 3s ease-in-out infinite}
+    .boot-track{height:1px;background:#253440;margin-top:18px;overflow:hidden}
+    .boot-track::after{content:'';display:block;height:1px;width:40%;background:linear-gradient(90deg,transparent,#81d8ff,transparent);animation:boot-scan 2.8s ease-in-out infinite}
+    @keyframes boot-pulse{50%{opacity:.35;box-shadow:0 0 6px #81d8ff22}}
+    @keyframes boot-scan{from{transform:translateX(-100%)}to{transform:translateX(350%)}}
+    @media(prefers-reduced-motion:reduce){.boot-mark,.boot-track::after{animation:none}}
+  </style>
+  <div id="loading" role="status" aria-label="กำลังโหลดเว็บไซต์ ONYX"><span class="boot-mark" aria-hidden="true"></span><strong>ONYX</strong><p>INITIALIZING THE FUTURE</p><span class="boot-track" aria-hidden="true"></span></div>
+  <script>window.addEventListener('flutter-first-frame',()=>document.getElementById('loading')?.remove());</script>
+  <noscript>กรุณาเปิด JavaScript เพื่อสำรวจเว็บไซต์ ONYX-01</noscript>
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage[colorlinks=true,urlcolor=blue]{hyperref}
+\title{ONYX-01: A Fictional Transforming Robot\\\large Technical Concept Dossier}
+\author{Prompt Engineering Learning Project}
+\date{September 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+ONYX-01 connects AI-generated visual design, mathematical modeling, control-flow diagrams, and digital presentation in a single educational prototype. All specifications are fictional educational assumptions. No physical robot or measured performance is claimed.
+\end{abstract}
+\section{Visual design}
+The design uses layered matte obsidian armor, graphite mechanical surfaces, a pointed helmet, narrow white-blue eyes, a V-shaped chest, and shoulder wheels. A single reference image anchors subsequent images. Generated details are visual concepts rather than manufacturing drawings.
+\section{Concept specifications}
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+Parameter & Fictional concept value \\
+\midrule
+Battery energy & 2400 Wh (2.4 kWh) \\
+Model speed domain & 0--60 km/h \\
+Base power consumption & 200 W \\
+Speed coefficient & $0.5\,\mathrm{W}/(\mathrm{km/h})^2$ \\
+Low-battery threshold & 20\% \\
+\bottomrule
+\end{tabular}
+\end{center}
+\section{Energy model}
+Let $v$ denote speed in km/h, $E$ energy in Wh, and $P$ power in W. Assume
+\begin{align}
+E &= 2400\ \mathrm{Wh},\\
+P(v) &= 200 + 0.5v^2\ \mathrm{W},\\
+t(v) &= \frac{E}{P(v)} = \frac{2400}{200+0.5v^2}\ \mathrm{h}, \qquad 0\leq v\leq 60.
+\end{align}
+The coefficient carries the units stated in the table, so both terms in $P(v)$ are powers. Energy divided by power gives time.
+\begin{center}
+\begin{tabular}{rrr}
+\toprule
+Speed (km/h) & Power (W) & Runtime (h) \\
+\midrule
+0 & 200 & 12 \\
+20 & 400 & 6 \\
+40 & 1000 & 2.4 \\
+60 & 2000 & 1.2 \\
+\bottomrule
+\end{tabular}
+\end{center}
+\section{Control flow}
+The conceptual controller first reads its sensors. Below 20\% battery, it stops the mission and requests charging. Otherwise, it checks for obstacles. An obstacle causes a stop and replanning before another sensor reading. With a clear path, the robot moves and repeats sensing. This is explanatory logic, not a certified controller.
+\section{Prompt iteration}
+The first prompt requested a short introduction. The revised prompt specified the compilation engine, document structure, two formatting examples, consistent numerical assumptions, and explicit limitations. This makes the resulting source easier to inspect and compile.
+\section{Limitations}
+The energy model ignores terrain, payload, temperature, changing battery efficiency, and transient motor loads. The transformation mechanism is not physically validated. AI-generated images can contain inconsistent geometry.
+\end{document}
