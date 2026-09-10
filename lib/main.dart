@@ -736,17 +736,19 @@ class HomePage extends StatelessWidget {
           child: ContentWidth(
             vertical: 48,
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Eyebrow('FROM PROMPT TO PROTOTYPE'),
                 const SizedBox(height: 18),
                 const Text(
                   'ผลลัพธ์ที่ดี เริ่มจากคำถามที่ชัดเจน',
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 28, fontWeight: FontWeight.w500),
                 ),
                 const SizedBox(height: 14),
                 const Text(
                   'ดูคำสั่งเริ่มต้น วิธีปรับโจทย์ และสิ่งที่ได้เรียนรู้จากแต่ละหัวข้อ',
+                  textAlign: TextAlign.center,
                   style: TextStyle(color: muted),
                 ),
                 const SizedBox(height: 24),
@@ -790,12 +792,13 @@ class StatsStrip extends StatelessWidget {
                   SizedBox(
                     width: c.maxWidth / (c.maxWidth < 650 ? 2 : 4),
                     child: Padding(
-                      padding: const EdgeInsets.only(left: 14),
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
                             stat.$1,
+                            textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 40,
                               height: 1.1,
@@ -806,6 +809,7 @@ class StatsStrip extends StatelessWidget {
                           const SizedBox(height: 10),
                           Text(
                             stat.$2,
+                            textAlign: TextAlign.center,
                             style: const TextStyle(
                               fontSize: 9,
                               letterSpacing: 1.8,
@@ -815,6 +819,7 @@ class StatsStrip extends StatelessWidget {
                           const SizedBox(height: 4),
                           Text(
                             stat.$3,
+                            textAlign: TextAlign.center,
                             style: const TextStyle(fontSize: 11, color: muted),
                           ),
                         ],
@@ -2155,47 +2160,54 @@ class SubmissionInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ContentWidth(
     vertical: 30,
-    child: Wrap(
-      spacing: 80,
-      runSpacing: 24,
-      children: const [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('จัดทำโดย', style: TextStyle(color: muted, fontSize: 11)),
-            SizedBox(height: 8),
-            Text(studentNameThai, style: TextStyle(fontSize: 20, color: paper)),
-            SizedBox(height: 6),
-            Text(
-              studentNameEnglish,
-              style: TextStyle(fontSize: 13, color: ice),
-            ),
-            SizedBox(height: 6),
-            Text(
-              'รหัสนักศึกษา $studentId',
-              style: TextStyle(fontSize: 12, color: muted),
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('เสนอ', style: TextStyle(color: muted, fontSize: 11)),
-            SizedBox(height: 8),
-            Text(
-              instructorNameThai,
-              style: TextStyle(fontSize: 18, color: paper),
-            ),
-            SizedBox(height: 6),
-            Text(instructorName, style: TextStyle(fontSize: 13, color: ice)),
-            SizedBox(height: 8),
-            Text(
-              instructorRoleThai,
-              style: TextStyle(fontSize: 12, color: muted),
-            ),
-          ],
-        ),
-      ],
+    child: DefaultTextStyle.merge(
+      textAlign: TextAlign.center,
+      child: Wrap(
+        alignment: WrapAlignment.center,
+        spacing: 80,
+        runSpacing: 24,
+        children: const [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('จัดทำโดย', style: TextStyle(color: muted, fontSize: 11)),
+              SizedBox(height: 8),
+              Text(
+                studentNameThai,
+                style: TextStyle(fontSize: 20, color: paper),
+              ),
+              SizedBox(height: 6),
+              Text(
+                studentNameEnglish,
+                style: TextStyle(fontSize: 13, color: ice),
+              ),
+              SizedBox(height: 6),
+              Text(
+                'รหัสนักศึกษา $studentId',
+                style: TextStyle(fontSize: 12, color: muted),
+              ),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text('เสนอ', style: TextStyle(color: muted, fontSize: 11)),
+              SizedBox(height: 8),
+              Text(
+                instructorNameThai,
+                style: TextStyle(fontSize: 18, color: paper),
+              ),
+              SizedBox(height: 6),
+              Text(instructorName, style: TextStyle(fontSize: 13, color: ice)),
+              SizedBox(height: 8),
+              Text(
+                instructorRoleThai,
+                style: TextStyle(fontSize: 12, color: muted),
+              ),
+            ],
+          ),
+        ],
+      ),
     ),
   );
 }
