@@ -645,7 +645,7 @@ class HomePage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'ONYX–01 เป็นหุ่นยนต์ต้นแบบในจินตนาการที่ใช้เป็นหัวข้อร่วมของงานทั้ง 5 ด้าน ตั้งแต่การสร้างภาพและกราฟ ไปจนถึงการเขียนเอกสารและสไลด์ แต่ละหัวข้อแสดงให้เห็นว่าการปรับคำสั่งช่วยให้ได้ผลลัพธ์ที่ชัดเจนขึ้นอย่างไร',
+                            'ONYX–01 เป็นหุ่นยนต์ต้นแบบในจินตนาการที่ใช้เป็นหัวข้อร่วมของงานทั้ง 6 ด้าน ตั้งแต่การสร้างภาพและกราฟ ไปจนถึงการเขียนเอกสารและสไลด์ แต่ละหัวข้อแสดงให้เห็นว่าการปรับคำสั่งช่วยให้ได้ผลลัพธ์ที่ชัดเจนขึ้นอย่างไร',
                             style: TextStyle(color: muted, height: 2),
                           ),
                           SizedBox(height: 18),
@@ -2157,59 +2157,171 @@ class NotFoundPage extends StatelessWidget {
 class SubmissionInfo extends StatelessWidget {
   const SubmissionInfo({super.key});
 
+  static const double _leftNaturalWidth = 520;
+  static const double _rightNaturalWidth = 230;
+  static const double _gap = 60;
+
   @override
-  Widget build(BuildContext context) => ContentWidth(
-    vertical: 30,
-    child: DefaultTextStyle.merge(
-      textAlign: TextAlign.center,
-      child: Wrap(
-        alignment: WrapAlignment.center,
-        spacing: 80,
-        runSpacing: 24,
+  Widget build(BuildContext context) {
+    return ContentWidth(
+      vertical: 30,
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final requiredWidth = _leftNaturalWidth + _rightNaturalWidth + _gap;
+
+          // ถ้าการแสดงฝั่งขวาจะทำให้ฝั่งซ้ายต้องย่อ
+          // ให้ซ่อนฝั่งขวาไปเลย
+          final showRight = constraints.maxWidth >= requiredWidth;
+
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: Align(
+                  alignment: Alignment.centerLeft,
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    alignment: Alignment.centerLeft,
+                    child: const _SubmissionLeft(),
+                  ),
+                ),
+              ),
+
+              if (showRight) ...[
+                const SizedBox(width: _gap),
+                const Align(
+                  alignment: Alignment.centerRight,
+                  child: _CourseInfo(),
+                ),
+              ],
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class _SubmissionLeft extends StatelessWidget {
+  const _SubmissionLeft();
+
+  @override
+  Widget build(BuildContext context) {
+    return DefaultTextStyle.merge(
+      textAlign: TextAlign.start,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('จัดทำโดย', style: TextStyle(color: muted, fontSize: 11)),
-              SizedBox(height: 8),
-              Text(
-                studentNameThai,
-                style: TextStyle(fontSize: 20, color: paper),
-              ),
-              SizedBox(height: 6),
-              Text(
-                studentNameEnglish,
-                style: TextStyle(fontSize: 13, color: ice),
-              ),
-              SizedBox(height: 6),
-              Text(
-                'รหัสนักศึกษา $studentId',
-                style: TextStyle(fontSize: 12, color: muted),
-              ),
-            ],
+          _SubmissionPersonInfo(
+            title: 'จัดทำโดย',
+            nameThai: studentNameThai,
+            nameEnglish: studentNameEnglish,
+            description: 'รหัสนักศึกษา $studentId',
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text('เสนอ', style: TextStyle(color: muted, fontSize: 11)),
-              SizedBox(height: 8),
-              Text(
-                instructorNameThai,
-                style: TextStyle(fontSize: 18, color: paper),
-              ),
-              SizedBox(height: 6),
-              Text(instructorName, style: TextStyle(fontSize: 13, color: ice)),
-              SizedBox(height: 8),
-              Text(
-                instructorRoleThai,
-                style: TextStyle(fontSize: 12, color: muted),
-              ),
-            ],
+          SizedBox(width: 80),
+          _SubmissionPersonInfo(
+            title: 'เสนอ',
+            nameThai: instructorNameThai,
+            nameEnglish: instructorName,
+            description: instructorRoleThai,
           ),
         ],
       ),
-    ),
-  );
+    );
+  }
+}
+
+class _SubmissionPersonInfo extends StatelessWidget {
+  const _SubmissionPersonInfo({
+    required this.title,
+    required this.nameThai,
+    required this.nameEnglish,
+    required this.description,
+  });
+
+  final String title;
+  final String nameThai;
+  final String nameEnglish;
+  final String description;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          title,
+          maxLines: 1,
+          softWrap: false,
+          style: const TextStyle(color: muted, fontSize: 11),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          nameThai,
+          maxLines: 1,
+          softWrap: false,
+          style: const TextStyle(fontSize: 20, color: paper),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          nameEnglish,
+          maxLines: 1,
+          softWrap: false,
+          style: const TextStyle(fontSize: 13, color: ice),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          description,
+          maxLines: 1,
+          softWrap: false,
+          style: const TextStyle(fontSize: 12, color: muted),
+        ),
+      ],
+    );
+  }
+}
+
+class _CourseInfo extends StatelessWidget {
+  const _CourseInfo();
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'ภาคการศึกษา',
+          maxLines: 1,
+          softWrap: false,
+          style: TextStyle(color: muted, fontSize: 11),
+        ),
+        SizedBox(height: 8),
+        Text(
+          'ปี 2569 เทอม 1',
+          maxLines: 1,
+          softWrap: false,
+          style: TextStyle(fontSize: 20, color: paper),
+        ),
+        SizedBox(height: 6),
+        Text(
+          'รหัสวิชา GE931-1',
+          maxLines: 1,
+          softWrap: false,
+          style: TextStyle(fontSize: 13, color: ice),
+        ),
+        SizedBox(height: 6),
+        Text(
+          'ปัญญาประดิษฐ์เบื้องต้น',
+          maxLines: 1,
+          softWrap: false,
+          style: TextStyle(fontSize: 12, color: muted),
+        ),
+      ],
+    );
+  }
 }
 
 class Footer extends StatelessWidget {
