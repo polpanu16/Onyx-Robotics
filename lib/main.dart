@@ -590,18 +590,6 @@ class HomePage extends StatelessWidget {
                         ],
                       ),
                     ),
-                  const Positioned(
-                    left: 64,
-                    bottom: 25,
-                    child: Text(
-                      'SCROLL TO DISCOVER     ↓',
-                      style: TextStyle(
-                        fontSize: 8,
-                        letterSpacing: 3,
-                        color: muted,
-                      ),
-                    ),
-                  ),
                 ],
               ),
             );
