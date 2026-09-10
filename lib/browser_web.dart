@@ -1,10 +1,9 @@
 import 'dart:js_interop';
 import 'dart:async';
 import 'package:web/web.dart' as web;
+import 'package:flutter_web_plugins/url_strategy.dart';
 
-void updateSectionUrl(String route) {
-  web.window.history.replaceState(null, '', '#$route');
-}
+void configureBrowserRoutes() => usePathUrlStrategy();
 
 void viewLink(String path) {
   web.window.open(

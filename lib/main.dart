@@ -16,7 +16,10 @@ const paper = Color(0xFFECEDEA);
 
 final visibleLessons = List<Lesson>.unmodifiable(lessons);
 
-void main() => runApp(const OnyxApp());
+void main() {
+  configureBrowserRoutes();
+  runApp(const OnyxApp());
+}
 
 class OnyxApp extends StatelessWidget {
   const OnyxApp({super.key});
@@ -519,11 +522,11 @@ class HomePage extends StatelessWidget {
                                 primary: true,
                               ),
                               ActionButton(
-                                'ดาวน์โหลด PDF ทุกหัวข้อ',
-                                () => openLink(
+                                'เปิดดู PDF ทุกหัวข้อ',
+                                () => viewLink(
                                   'downloads/pdfs/onyx-complete.pdf',
                                 ),
-                                icon: Icons.download,
+                                icon: Icons.open_in_new,
                               ),
                             ],
                           ),
@@ -1126,7 +1129,7 @@ class LearningPage extends StatelessWidget {
           ),
           const SizedBox(height: 24),
           const Notice(
-            'รวมภาพ AI กราฟ Desmos ผังงาน Mermaid เอกสาร Overleaf และสไลด์ NotebookLM พร้อมกระบวนการสร้างเว็บไซต์และเผยแพร่บน GitHub โดยรอบแรกของหัวข้อ NotebookLM ใช้ฉบับจำลองอย่างง่ายเพื่อเปรียบเทียบ',
+            'รวมภาพ AI กราฟ Desmos ผังงาน Mermaid เอกสาร Overleaf และสไลด์ NotebookLM พร้อมผลงานจริงทั้ง Zero-shot และ Few-shot และกระบวนการสร้างเว็บไซต์',
           ),
           const SizedBox(height: 36),
           const LessonGrid(),
@@ -1719,8 +1722,10 @@ class ResultView extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             ActionButton(
-              'เปิด Overleaf',
-              () => openLink('https://www.overleaf.com/'),
+              'เปิดผลงาน Overleaf',
+              () => viewLink(
+                'downloads/${refined ? 'onyx_few.pdf' : 'onyx_zero.pdf'}',
+              ),
             ),
           ],
         );
@@ -1735,12 +1740,12 @@ class ResultView extends StatelessWidget {
             const SizedBox(height: 18),
             ActionButton(
               refined
-                  ? 'เปิด PDF จาก NotebookLM · 10 หน้า'
-                  : 'เปิด PDF จำลอง Zero-shot · 3 หน้า',
+                  ? 'เปิด PDF Few-shot · 9 หน้า'
+                  : 'เปิด PDF Zero-shot · 6 หน้า',
               () => viewLink(
                 refined
-                    ? 'downloads/ONYX-01_Digital_Simulation.pdf'
-                    : 'downloads/notebooklm-zero-simulated.pdf',
+                    ? 'downloads/onyx_notebooklm_few.pdf'
+                    : 'downloads/onyx_notebooklm_zero.pdf',
               ),
               primary: true,
               icon: Icons.picture_as_pdf,
@@ -1750,8 +1755,8 @@ class ResultView extends StatelessWidget {
               'ดาวน์โหลด PDF ผลลัพธ์',
               () => openLink(
                 refined
-                    ? 'downloads/ONYX-01_Digital_Simulation.pdf'
-                    : 'downloads/notebooklm-zero-simulated.pdf',
+                    ? 'downloads/onyx_notebooklm_few.pdf'
+                    : 'downloads/onyx_notebooklm_zero.pdf',
               ),
               icon: Icons.download,
             ),
@@ -2185,7 +2190,7 @@ class SubmissionInfo extends StatelessWidget {
             Text(instructorName, style: TextStyle(fontSize: 13, color: ice)),
             SizedBox(height: 8),
             Text(
-              'โครงงานเพื่อการศึกษา ไม่แสวงหาผลกำไร',
+              instructorRoleThai,
               style: TextStyle(fontSize: 12, color: muted),
             ),
           ],
@@ -2231,7 +2236,7 @@ class Footer extends StatelessWidget {
           ),
           const SizedBox(height: 8),
           const Text(
-            'เสนอ $instructorNameThai · โครงงานเพื่อการศึกษา ไม่แสวงหาผลกำไร',
+            'เสนอ $instructorNameThai · $instructorRoleThai',
             style: TextStyle(fontSize: 10, color: muted, height: 1.8),
           ),
         ],

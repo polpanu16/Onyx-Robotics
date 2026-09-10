@@ -13,6 +13,7 @@ void main() {
       'studentId': studentId,
       'instructor': instructorName,
       'instructorThai': instructorNameThai,
+      'instructorRoleThai': instructorRoleThai,
     },
     'steps': stepTitles,
     'labels': stepLabels,

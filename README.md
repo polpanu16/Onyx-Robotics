@@ -13,7 +13,7 @@
 2. Desmos: แบบจำลองความเร็วและเวลาทำงาน พร้อมลิงก์กราฟสองรอบ
 3. Mermaid: ภาพผังงานและโค้ดทั้งสองรอบ
 4. LaTeX: PDF จาก Overleaf รอบแรก 1 หน้า และรอบปรับปรุง 2 หน้า
-5. NotebookLM: ฉบับจำลอง Zero-shot 3 หน้า และผลลัพธ์จริงรอบปรับปรุง 10 หน้า
+5. NotebookLM: ผลลัพธ์จริง Zero-shot ภาษาไทย 6 หน้า และ Few-shot ภาษาอังกฤษ 9 หน้า
 6. GitHub: เว็บไซต์ก่อนและหลังปรับ Prompt พร้อมการเผยแพร่ผลงาน
 
 ## เอกสารดาวน์โหลด
@@ -23,14 +23,18 @@ PDF รวม 33 หน้า และ PDF แยกหัวข้อ อย�
 ไฟล์ Overleaf อยู่ใน `web/downloads/onyx_zero.pdf` และ `web/downloads/onyx_few.pdf`
 ฉบับรอบปรับปรุงลบประโยคเตือนก่อนส่งออก โดยเก็บต้นฉบับเดิมไว้ในแฟ้มสำรองภายในเครื่อง
 
-ไฟล์ NotebookLM จริงคือ `web/downloads/ONYX-01_Digital_Simulation.pdf`
-ฉบับจำลองคือ `web/downloads/notebooklm-zero-simulated.pdf` จัดทำโดยย่อรายละเอียดจากรอบปรับปรุง
+ไฟล์ NotebookLM จริงคือ `web/downloads/onyx_notebooklm_zero.pdf` (6 หน้า)
+และ `web/downloads/onyx_notebooklm_few.pdf` (9 หน้า)
 
 ## การเผยแพร่
 
 ชุดเว็บสำหรับเผยแพร่ถูกจัดไว้ใน `docs/` ของ repository
 เมื่ออัปโหลดขึ้นสาขา `main` ระบบ GitHub Actions จะเผยแพร่ชุดเว็บนี้ผ่าน GitHub Pages
 ตั้งค่า Settings > Pages > Source เป็น GitHub Actions
+
+เส้นทางบทเรียนใช้ `/learn/slides/4` โดยไม่มี `#` หลังสร้างชุดเว็บ ให้รัน
+`fvm dart tool/prepare_web_routes.dart` เพื่อเตรียมหน้าเปิดตรงสำหรับทุกหัวข้อ
+จากนั้นใช้ไฟล์ทั้งหมดใน `build/web/` เป็นชุดเผยแพร่
 
 ชื่อ คำอธิบาย และภาพตัวอย่างสำหรับแชร์ลิงก์กำหนดเป็น ONYX-01 แล้ว
 

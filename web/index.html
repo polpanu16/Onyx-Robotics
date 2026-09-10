@@ -62,6 +62,13 @@
   <div id="loading" role="status" aria-label="กำลังโหลดเว็บไซต์ ONYX"><span class="boot-mark" aria-hidden="true"></span><strong>ONYX</strong><p>INITIALIZING THE FUTURE</p><span class="boot-track" aria-hidden="true"></span></div>
   <script>window.addEventListener('flutter-first-frame',()=>document.getElementById('loading')?.remove());</script>
   <noscript>กรุณาเปิด JavaScript เพื่อสำรวจเว็บไซต์ ONYX-01</noscript>
+  <script>
+    // Preserve older shared lesson links while switching to clean paths.
+    if (location.hash.startsWith('#/')) {
+      const destination = new URL(location.hash.slice(2), document.baseURI);
+      history.replaceState(null, '', destination.pathname + destination.search);
+    }
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>

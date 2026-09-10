@@ -39,15 +39,9 @@ for filename, prefix in [('onyx_zero.pdf', 'overleaf-zero'), ('onyx_few.pdf', 'o
             page.get_pixmap(matrix=fitz.Matrix(2, 2), alpha=False).save(
                 root / f'assets/images/{prefix}-{i+1}.png')
 
-notebook = fitz.open(root / 'web/downloads/ONYX-01_Digital_Simulation.pdf')
-previews = root / 'tmp/pdfs/notebooklm'
-previews.mkdir(parents=True, exist_ok=True)
-sheet = fitz.open()
-canvas = sheet.new_page(width=1280, height=360 * ((len(notebook) + 1) // 2))
-for i, page in enumerate(notebook):
-    pix = page.get_pixmap(matrix=fitz.Matrix(1, 1), alpha=False)
-    pix.save(previews / f'page-{i+1:02}.png')
-    x, y = (i % 2) * 640, (i // 2) * 360
-    canvas.insert_image(fitz.Rect(x, y, x+640, y+360), pixmap=pix)
-canvas.get_pixmap().save(previews / 'contact-sheet.png')
-print(f'Overleaf sentence removed; original archived. NotebookLM: {len(notebook)} pages rendered.')
+for version, expected, preview in [('zero', 6, 'zero'), ('few', 9, 'refined')]:
+    with fitz.open(root / f'web/downloads/onyx_notebooklm_{version}.pdf') as notebook:
+        assert len(notebook) == expected
+        notebook[0].get_pixmap(matrix=fitz.Matrix(1, 1), alpha=False).save(
+            root / f'assets/images/notebooklm-{preview}-1.png')
+        print(f'NotebookLM {version}: {len(notebook)} pages; preview updated.')
